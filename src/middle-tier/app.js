@@ -69,8 +69,12 @@ app.get("/taskpane.html", async (req, res) => {
   return res.sendFile("taskpane.html");
 });
 
-app.get("/home.html", async (req, res) => {
-  return res.sendFile("home.html");
+app.get("/msgcompose.html", async (req, res) => {
+  return res.sendFile("msgcompose.html");
+});
+
+app.get("/msgread.html", async (req, res) => {
+  return res.sendFile("msgread.html");
 });
 
 app.get("/fallbackauthdialog.html", async (req, res) => {
