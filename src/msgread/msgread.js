@@ -5,9 +5,18 @@
 
 /* global document, Office */
 
-import {getOrganisationData} from '../helpers/lists-helper'
+import { getUserProfile } from "src/helpers/sso-helper";
 
 Office.onReady((info) => {
-  
+  if (info.host === Office.HostType.Outlook) {
+    document.getElementById("getProfileButton").onclick = run;
+  }
 });
 
+export async function run() {
+  await getUserProfile(showMsgReadTaskPane);
+}
+
+async function showMsgReadTaskPane(societesData) {
+  console.log(societesData)
+}

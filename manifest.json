@@ -1,5 +1,5 @@
 {
-    "$schema": "https://developer.microsoft.com/json-schemas/teams/v1.17/MicrosoftTeams.schema.json",
+    "$schema": "https://developer.microsoft.com/json-schemas/office-addin-manifest.schema.json",
     "id": "009bc2e6-2c32-4ed8-a533-1f200400c1eb",
     "manifestVersion": "1.17",
     "version": "1.0.0",
@@ -63,15 +63,7 @@
                     "code": {
                         "page": "https://localhost:{PORT}/taskpane.html"
                     },
-                    "lifetime": "short",
-                    "actions": [
-                        {
-                            "id": "DefaultTaskPaneShow",
-                            "type": "openPage",
-                            "pinnable": false,
-                            "view": "dashboard"
-                        }
-                    ]
+                    "lifetime": "short"
                 },
                 {
                     "id": "ComposeTaskPaneRuntime",
@@ -79,15 +71,7 @@
                     "code": {
                         "page": "https://localhost:{PORT}/msgcompose.html"
                     },
-                    "lifetime": "short",
-                    "actions": [
-                        {
-                            "id": "ComposeTaskPaneShow",
-                            "type": "openPage",
-                            "pinnable": false,
-                            "view": "dashboard"
-                        }
-                    ]
+                    "lifetime": "short"
                 },
                 {
                     "id": "ReadTaskPaneRuntime",
@@ -95,15 +79,7 @@
                     "code": {
                         "page": "https://localhost:{PORT}/msgread.html"
                     },
-                    "lifetime": "short",
-                    "actions": [
-                        {
-                            "id": "ReadTaskPaneShow",
-                            "type": "openPage",
-                            "pinnable": false,
-                            "view": "dashboard"
-                        }
-                    ]
+                    "lifetime": "short"
                 }
             ],
             "ribbons": [
@@ -118,43 +94,11 @@
                                 {
                                     "id": "defaultGroup",
                                     "label": "Contoso Add-in",
-                                    "icons": [
-                                        {
-                                            "size": 16,
-                                            "url": "https://localhost:{PORT}/assets/icon-16.png"
-                                        },
-                                        {
-                                            "size": 32,
-                                            "url": "https://localhost:{PORT}/assets/icon-32.png"
-                                        },
-                                        {
-                                            "size": 80,
-                                            "url": "https://localhost:{PORT}/assets/icon-80.png"
-                                        }
-                                    ],
                                     "controls": [
                                         {
                                             "id": "defaultOpenPaneButton",
                                             "type": "button",
-                                            "label": "Show Task Pane",
-                                            "icons": [
-                                                {
-                                                    "size": 16,
-                                                    "url": "https://localhost:{PORT}/assets/icon-16.png"
-                                                },
-                                                {
-                                                    "size": 32,
-                                                    "url": "https://localhost:{PORT}/assets/icon-32.png"
-                                                },
-                                                {
-                                                    "size": 80,
-                                                    "url": "https://localhost:{PORT}/assets/icon-80.png"
-                                                }
-                                            ],
-                                            "supertip": {
-                                                "title": "Show Task Pane",
-                                                "description": "Opens a task pane."
-                                            },
+                                            "label": "Show Default Task Pane",
                                             "actionId": "DefaultTaskPaneShow"
                                         }
                                     ]
@@ -173,69 +117,13 @@
                             "groups": [
                                 {
                                     "id": "msgComposeGroup",
-                                    "label": "Contoso Add-in",
-                                    "icons": [
-                                        {
-                                            "size": 16,
-                                            "url": "https://localhost:{PORT}/assets/icon-16.png"
-                                        },
-                                        {
-                                            "size": 32,
-                                            "url": "https://localhost:{PORT}/assets/icon-32.png"
-                                        },
-                                        {
-                                            "size": 80,
-                                            "url": "https://localhost:{PORT}/assets/icon-80.png"
-                                        }
-                                    ],
+                                    "label": "Compose Add-in",
                                     "controls": [
                                         {
                                             "id": "msgComposeOpenPaneButton",
                                             "type": "button",
-                                            "label": "Show Task Pane",
-                                            "icons": [
-                                                {
-                                                    "size": 16,
-                                                    "url": "https://localhost:{PORT}/assets/icon-16.png"
-                                                },
-                                                {
-                                                    "size": 32,
-                                                    "url": "https://localhost:{PORT}/assets/icon-32.png"
-                                                },
-                                                {
-                                                    "size": 80,
-                                                    "url": "https://localhost:{PORT}/assets/icon-80.png"
-                                                }
-                                            ],
-                                            "supertip": {
-                                                "title": "Show Task Pane",
-                                                "description": "Opens a task pane."
-                                            },
+                                            "label": "Show Compose Task Pane",
                                             "actionId": "ComposeTaskPaneShow"
-                                        },
-                                        {
-                                            "id": "ActionButtonCompose",
-                                            "type": "button",
-                                            "label": "Perform an action",
-                                            "icons": [
-                                                {
-                                                    "size": 16,
-                                                    "url": "https://localhost:{PORT}/assets/icon-16.png"
-                                                },
-                                                {
-                                                    "size": 32,
-                                                    "url": "https://localhost:{PORT}/assets/icon-32.png"
-                                                },
-                                                {
-                                                    "size": 80,
-                                                    "url": "https://localhost:{PORT}/assets/icon-80.png"
-                                                }
-                                            ],
-                                            "supertip": {
-                                                "title": "Perform an action",
-                                                "description": "Perform an action when clicked."
-                                            },
-                                            "actionId": "action"
                                         }
                                     ]
                                 }
@@ -253,69 +141,13 @@
                             "groups": [
                                 {
                                     "id": "msgReadGroup",
-                                    "label": "Contoso Add-in",
-                                    "icons": [
-                                        {
-                                            "size": 16,
-                                            "url": "https://localhost:{PORT}/assets/icon-16.png"
-                                        },
-                                        {
-                                            "size": 32,
-                                            "url": "https://localhost:{PORT}/assets/icon-32.png"
-                                        },
-                                        {
-                                            "size": 80,
-                                            "url": "https://localhost:{PORT}/assets/icon-80.png"
-                                        }
-                                    ],
+                                    "label": "Read Add-in",
                                     "controls": [
                                         {
                                             "id": "msgReadOpenPaneButton",
                                             "type": "button",
-                                            "label": "Show Task Pane",
-                                            "icons": [
-                                                {
-                                                    "size": 16,
-                                                    "url": "https://localhost:{PORT}/assets/icon-16.png"
-                                                },
-                                                {
-                                                    "size": 32,
-                                                    "url": "https://localhost:{PORT}/assets/icon-32.png"
-                                                },
-                                                {
-                                                    "size": 80,
-                                                    "url": "https://localhost:{PORT}/assets/icon-80.png"
-                                                }
-                                            ],
-                                            "supertip": {
-                                                "title": "Show Task Pane",
-                                                "description": "Opens a task pane."
-                                            },
+                                            "label": "Show Read Task Pane",
                                             "actionId": "ReadTaskPaneShow"
-                                        },
-                                        {
-                                            "id": "ActionButtonRead",
-                                            "type": "button",
-                                            "label": "Perform an action",
-                                            "icons": [
-                                                {
-                                                    "size": 16,
-                                                    "url": "https://localhost:{PORT}/assets/icon-16.png"
-                                                },
-                                                {
-                                                    "size": 32,
-                                                    "url": "https://localhost:{PORT}/assets/icon-32.png"
-                                                },
-                                                {
-                                                    "size": 80,
-                                                    "url": "https://localhost:{PORT}/assets/icon-80.png"
-                                                }
-                                            ],
-                                            "supertip": {
-                                                "title": "Perform an action",
-                                                "description": "Perform an action when clicked."
-                                            },
-                                            "actionId": "action"
                                         }
                                     ]
                                 }
