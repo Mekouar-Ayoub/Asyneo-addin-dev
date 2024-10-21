@@ -75,14 +75,12 @@
                 "multiselect": true
             }
         ]
-                   
-
                 },
                 {
                     "id": "ComposeTaskPaneRuntime",
                     "type": "general",
                     "code": {
-                        "page": "https://localhost:{PORT}/msgcompose.html"
+                        "page": "https://localhost:{PORT}/taskpane.html"
                     },
                     "lifetime": "short",
                     "actions": [
@@ -100,7 +98,7 @@
                     "id": "ReadTaskPaneRuntime",
                     "type": "general",
                     "code": {
-                        "page": "https://localhost:{PORT}/msgread.html"
+                        "page": "https://localhost:{PORT}/taskpane.html"
                     },
                     "lifetime": "short",
                     "actions": [

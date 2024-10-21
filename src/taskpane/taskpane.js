@@ -11,6 +11,10 @@ import { getCorrespondancesData } from "../helpers/lists-helper.js";
 
 Office.onReady((info) => {
   if (info.host === Office.HostType.Outlook) {
+    // Set up the ItemChanged event.
+    Office.context.mailbox.addHandlerAsync(Office.EventType.ItemChanged, itemChanged);
+    updateTaskPaneUI(Office.context.mailbox.item);
+
     document.getElementById("getProfileButton").onclick = run;
     document.getElementById("societesButton").onclick = societesClick;
     document.getElementById("correspondancesButton").onclick = correspondancesClick;
@@ -23,6 +27,23 @@ Office.onReady((info) => {
 var societesData;
 var correspondancesData;
 var intervenantsData;
+
+function itemChanged(eventArgs) {
+  // Update UI based on the new current item.
+  updateTaskPaneUI(Office.context.mailbox.item);
+}
+
+function updateTaskPaneUI(item) {
+  // Assuming that item is always a read item (instead of a compose item).
+  if (item != null) console.log(item);
+  /*if(item.subject == ) {
+    //msgRead
+  }
+
+  if(item.subject == ) {
+    //mdgCOmpose
+  }*/
+}
 
 function searchInputChange(value) {}
 
