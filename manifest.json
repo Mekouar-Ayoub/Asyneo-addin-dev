@@ -58,15 +58,7 @@
             },
             "runtimes": [
                 {
-                    "requirements": {
-                        "capabilities": [
-                            {
-                                "name": "Mailbox",
-                                "minVersion": "1.3"
-                            }
-                        ]
-                    },
-                    "id": "TaskPaneRuntime",
+                    "id": "DefaultTaskPaneRuntime",
                     "type": "general",
                     "code": {
                         "page": "https://localhost:{PORT}/taskpane.html"
@@ -74,7 +66,7 @@
                     "lifetime": "short",
                     "actions": [
                         {
-                            "id": "TaskPaneRuntimeShow",
+                            "id": "DefaultTaskPaneShow",
                             "type": "openPage",
                             "pinnable": false,
                             "view": "dashboard"
@@ -82,18 +74,34 @@
                     ]
                 },
                 {
-                    "id": "CommandsRuntime",
+                    "id": "ComposeTaskPaneRuntime",
                     "type": "general",
                     "code": {
-                        "page": "https://localhost:{PORT}/commands.html",
-                        "script": "https://localhost:{PORT}/commands.js"
+                        "page": "https://localhost:{PORT}/msgcompose.html"
                     },
                     "lifetime": "short",
                     "actions": [
                         {
-                            "id": "action",
-                            "type": "executeFunction",
-                            "displayName": "action"
+                            "id": "ComposeTaskPaneShow",
+                            "type": "openPage",
+                            "pinnable": false,
+                            "view": "dashboard"
+                        }
+                    ]
+                },
+                {
+                    "id": "ReadTaskPaneRuntime",
+                    "type": "general",
+                    "code": {
+                        "page": "https://localhost:{PORT}/msgread.html"
+                    },
+                    "lifetime": "short",
+                    "actions": [
+                        {
+                            "id": "ReadTaskPaneShow",
+                            "type": "openPage",
+                            "pinnable": false,
+                            "view": "dashboard"
                         }
                     ]
                 }
@@ -101,11 +109,67 @@
             "ribbons": [
                 {
                     "contexts": [
-                        "mailCompose", "mailRead", "default"
+                        "default"
                     ],
                     "tabs": [
                         {
                             "builtInTabId": "TabDefault",
+                            "groups": [
+                                {
+                                    "id": "defaultGroup",
+                                    "label": "Contoso Add-in",
+                                    "icons": [
+                                        {
+                                            "size": 16,
+                                            "url": "https://localhost:{PORT}/assets/icon-16.png"
+                                        },
+                                        {
+                                            "size": 32,
+                                            "url": "https://localhost:{PORT}/assets/icon-32.png"
+                                        },
+                                        {
+                                            "size": 80,
+                                            "url": "https://localhost:{PORT}/assets/icon-80.png"
+                                        }
+                                    ],
+                                    "controls": [
+                                        {
+                                            "id": "defaultOpenPaneButton",
+                                            "type": "button",
+                                            "label": "Show Task Pane",
+                                            "icons": [
+                                                {
+                                                    "size": 16,
+                                                    "url": "https://localhost:{PORT}/assets/icon-16.png"
+                                                },
+                                                {
+                                                    "size": 32,
+                                                    "url": "https://localhost:{PORT}/assets/icon-32.png"
+                                                },
+                                                {
+                                                    "size": 80,
+                                                    "url": "https://localhost:{PORT}/assets/icon-80.png"
+                                                }
+                                            ],
+                                            "supertip": {
+                                                "title": "Show Task Pane",
+                                                "description": "Opens a task pane."
+                                            },
+                                            "actionId": "DefaultTaskPaneShow"
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "contexts": [
+                        "messageCompose"
+                    ],
+                    "tabs": [
+                        {
+                            "builtInTabId": "TabMessageCompose",
                             "groups": [
                                 {
                                     "id": "msgComposeGroup",
@@ -147,39 +211,12 @@
                                                 "title": "Show Task Pane",
                                                 "description": "Opens a task pane."
                                             },
-                                            "actionId": "TaskPaneRuntimeShow"
+                                            "actionId": "ComposeTaskPaneShow"
                                         },
                                         {
-                                            "id": "ActionButton",
+                                            "id": "ActionButtonCompose",
                                             "type": "button",
                                             "label": "Perform an action",
                                             "icons": [
                                                 {
-                                                    "size": 16,
-                                                    "url": "https://localhost:{PORT}/assets/icon-16.png"
-                                                },
-                                                {
-                                                    "size": 32,
-                                                    "url": "https://localhost:{PORT}/assets/icon-32.png"
-                                                },
-                                                {
-                                                    "size": 80,
-                                                    "url": "https://localhost:{PORT}/assets/icon-80.png"
-                                                }
-                                            ],
-                                            "supertip": {
-                                                "title": "Perform an action",
-                                                "description": "Perform an action when clicked."
-                                            },
-                                            "actionId": "action"
-                                        }
-                                    ]
-                                }
-                            ]
-                        }
-                    ]
-                }
-            ]
-        }
-    ]
-}
+                                                    
