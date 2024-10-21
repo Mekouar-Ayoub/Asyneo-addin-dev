@@ -15,9 +15,10 @@ const port = process.env.API_PORT || "3000";
 app.set("port", port);
 
 // view engine setup
+/*
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "pug");
-
+*/
 app.use(logger("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -28,15 +29,15 @@ app.use(express.static(path.join(process.cwd(), "dist")));
 
 // Serve the client-side task pane files
 app.get("/taskpane.html", async (req, res) => {
-  return res.sendFile(path.join(__dirname, "taskpane.html"));
+  return res.sendFile("taskpane.html");
 });
 
 app.get("/msgcompose.html", async (req, res) => {
-  return res.sendFile(path.join(__dirname, "msgcompose.html"));
+  return res.sendFile("msgcompose.html");
 });
 
 app.get("/msgread.html", async (req, res) => {
-  return res.sendFile(path.join(__dirname, "msgread.html"));
+  return res.sendFile("msgread.html");
 });
 
 // Catch 404 and forward to error handler
@@ -54,7 +55,7 @@ app.use(function (err, req, res) {
 
 // Create HTTPS server
 getHttpsServerOptions().then((options) => {
-  https.createServer(options, app).listen(port, () => 
-      console.log(`Server running on ${port} in ${process.env.NODE_ENV} mode`)
-  );
+  https
+    .createServer(options, app)
+    .listen(port, () => console.log(`Server running on ${port} in ${process.env.NODE_ENV} mode`));
 });

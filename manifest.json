@@ -41,6 +41,7 @@
         "resource": "api://9e771e21-8974-435d-aa55-a7c6a69f8137"
     },
     "validDomains": [
+        "localhost",
         "contoso.com"
     ],
     "extensions": [
@@ -89,17 +90,40 @@
                     ],
                     "tabs": [
                         {
-                            "builtInTabId": "TabDefault",
+                            "id": "TabDefault",
+                            "label": "Contoso Add-in",
                             "groups": [
                                 {
                                     "id": "defaultGroup",
-                                    "label": "Contoso Add-in",
+                                    "label": "Default Group",
                                     "controls": [
                                         {
                                             "id": "defaultOpenPaneButton",
                                             "type": "button",
                                             "label": "Show Default Task Pane",
-                                            "actionId": "DefaultTaskPaneShow"
+                                            "view": "dashboard",
+                                            "pinnable": true,
+                                            "supportsNoItemContext": true,
+                                            "multiselect": true,
+                                            "actionId": "DefaultTaskPaneShow",
+                                            "icons": [
+                        {
+                          "size": 16,
+                          "url": "https://localhost:{PORT}/assets/icon-16.png"
+                        },
+                        {
+                          "size": 32,
+                          "url": "https://localhost:{PORT}/assets/icon-32.png"
+                        },
+                        {
+                          "size": 80,
+                          "url": "https://localhost:{PORT}/assets/icon-80.png"
+                        }
+                      ],
+                            "supertip": {
+                                "title": "General",
+                                "description": "Opens the default task pane."
+                            }
                                         }
                                     ]
                                 }
@@ -109,22 +133,46 @@
                 },
                 {
                     "contexts": [
-                        "messageCompose"
+                        "mailCompose"
                     ],
                     "tabs": [
                         {
-                            "builtInTabId": "TabMessageCompose",
+                            "id": "TabMessageCompose",
+                            "label": "Compose Add-in",
                             "groups": [
                                 {
                                     "id": "msgComposeGroup",
-                                    "label": "Compose Add-in",
+                                    "label": "Compose Group",
                                     "controls": [
                                         {
                                             "id": "msgComposeOpenPaneButton",
+                                            "view": "dashboard",
+                                            "pinnable": true,
+                                            "supportsNoItemContext": true,
+                                            "multiselect": true,
                                             "type": "button",
                                             "label": "Show Compose Task Pane",
-                                            "actionId": "ComposeTaskPaneShow"
+                                            "actionId": "ComposeTaskPaneShow",
+                                            "icons": [
+                        {
+                          "size": 16,
+                          "url": "https://localhost:{PORT}/assets/icon-16.png"
+                        },
+                        {
+                          "size": 32,
+                          "url": "https://localhost:{PORT}/assets/icon-32.png"
+                        },
+                        {
+                          "size": 80,
+                          "url": "https://localhost:{PORT}/assets/icon-80.png"
+                        }
+                      ],
+                                        "supertip": {
+                                            "title": "Rediger un mail",
+                                            "description": "Opens the default task pane."
                                         }
+                                        }
+                                        
                                     ]
                                 }
                             ]
@@ -133,21 +181,44 @@
                 },
                 {
                     "contexts": [
-                        "messageRead"
+                        "mailRead"
                     ],
                     "tabs": [
                         {
-                            "builtInTabId": "TabMessageRead",
+                            "id": "TabMessageRead",
+                            "label": "Read Add-in",
                             "groups": [
                                 {
                                     "id": "msgReadGroup",
-                                    "label": "Read Add-in",
+                                    "label": "Read Group",
                                     "controls": [
                                         {
                                             "id": "msgReadOpenPaneButton",
                                             "type": "button",
                                             "label": "Show Read Task Pane",
-                                            "actionId": "ReadTaskPaneShow"
+                                            "view": "dashboard",
+                                            "pinnable": true,
+                                            "supportsNoItemContext": true,
+                                            "multiselect": true,
+                                            "actionId": "ReadTaskPaneShow",
+                                            "icons": [
+                        {
+                          "size": 16,
+                          "url": "https://localhost:{PORT}/assets/icon-16.png"
+                        },
+                        {
+                          "size": 32,
+                          "url": "https://localhost:{PORT}/assets/icon-32.png"
+                        },
+                        {
+                          "size": 80,
+                          "url": "https://localhost:{PORT}/assets/icon-80.png"
+                        }
+                      ],
+                                        "supertip": {
+                                            "title": "Lire un mail",
+                                            "description": "Opens the default task pane."
+                                        }
                                         }
                                     ]
                                 }
