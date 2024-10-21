@@ -36,7 +36,9 @@ function itemChanged(eventArgs) {
 function updateTaskPaneUI(item) {
   // Assuming that item is always a read item (instead of a compose item).
   if (item != null) console.log(item);
-  /*if(item.subject == ) {
+
+  /* TODO adapt based on item properties
+  if(item.subject == ) {
     //msgRead
   }
 
