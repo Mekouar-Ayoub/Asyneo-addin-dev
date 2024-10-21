@@ -64,7 +64,19 @@
                     "code": {
                         "page": "https://localhost:{PORT}/taskpane.html"
                     },
-                    "lifetime": "short"
+                    "lifetime": "short",
+                    "actions": [
+            {
+                "id": "TaskPaneRuntimeShow",
+                "type": "openPage",
+                "pinnable": false,
+                "view": "dashboard",
+                "supportsNoItemContext": true,
+                "multiselect": true
+            }
+        ]
+                   
+
                 },
                 {
                     "id": "ComposeTaskPaneRuntime",
@@ -72,7 +84,17 @@
                     "code": {
                         "page": "https://localhost:{PORT}/msgcompose.html"
                     },
-                    "lifetime": "short"
+                    "lifetime": "short",
+                    "actions": [
+            {
+                "id": "TaskPaneRuntimeShow",
+                "type": "openPage",
+                "pinnable": false,
+                "view": "dashboard",
+                "supportsNoItemContext": true,
+                "multiselect": true
+            }
+        ]
                 },
                 {
                     "id": "ReadTaskPaneRuntime",
@@ -80,7 +102,17 @@
                     "code": {
                         "page": "https://localhost:{PORT}/msgread.html"
                     },
-                    "lifetime": "short"
+                    "lifetime": "short",
+                    "actions": [
+            {
+                "id": "TaskPaneRuntimeShow",
+                "type": "openPage",
+                "pinnable": false,
+                "view": "dashboard",
+                "supportsNoItemContext": true,
+                "multiselect": true
+            }
+        ]
                 }
             ],
             "ribbons": [
@@ -101,10 +133,6 @@
                                             "id": "defaultOpenPaneButton",
                                             "type": "button",
                                             "label": "Show Default Task Pane",
-                                            "view": "dashboard",
-                                            "pinnable": true,
-                                            "supportsNoItemContext": true,
-                                            "multiselect": true,
                                             "actionId": "DefaultTaskPaneShow",
                                             "icons": [
                         {
@@ -146,10 +174,6 @@
                                     "controls": [
                                         {
                                             "id": "msgComposeOpenPaneButton",
-                                            "view": "dashboard",
-                                            "pinnable": true,
-                                            "supportsNoItemContext": true,
-                                            "multiselect": true,
                                             "type": "button",
                                             "label": "Show Compose Task Pane",
                                             "actionId": "ComposeTaskPaneShow",
@@ -196,10 +220,6 @@
                                             "id": "msgReadOpenPaneButton",
                                             "type": "button",
                                             "label": "Show Read Task Pane",
-                                            "view": "dashboard",
-                                            "pinnable": true,
-                                            "supportsNoItemContext": true,
-                                            "multiselect": true,
                                             "actionId": "ReadTaskPaneShow",
                                             "icons": [
                         {
