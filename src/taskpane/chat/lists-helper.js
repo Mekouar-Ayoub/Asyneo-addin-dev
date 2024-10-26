@@ -4,7 +4,7 @@ import fetch from "node-fetch";
 
 async function fetchSharePointListByDisplayName(accessToken, listDisplayName) {
   // Use the filter parameter to get the list by display name
-  const url = `https://graph.microsoft.com/v1.0/sites/2beeb2a2-19f8-46cc-998b-d1fa94ba6c0f/lists?$filter=displayName eq '${listDisplayName}'`;
+  const url = `c'${listDisplayName}'`;
 
   try {
     const response = await fetch(url, {
@@ -119,18 +119,6 @@ export async function getSociete_telData() {
     if (listId) {
       return fetchListItems(accessToken, listId);
     }
-
-  });
-}
-
-export async function getCorrespondances_telData() {
-  var accessToken = localStorage.getItem("token");
-
-  return fetchSharePointListByDisplayName(accessToken, "telephones_correspondances").then((listId) => {
-    if (listId) {
-      return fetchListItems(accessToken, listId);
-    }
-
   });
 }
 
@@ -138,24 +126,12 @@ export async function getCorrespondances_telData() {
 export async function getIntervenantsData() {
   var accessToken = localStorage.getItem("token");
 
-  return fetchSharePointListByDisplayName(accessToken, "intervenants").then((listId) => {
+  fetchSharePointListByDisplayName(accessToken, "intervenants").then((listId) => {
     if (listId) {
       return fetchListItems(accessToken, listId);
     }
   });
 }
-
-
-export async function getIntervenants_telData() {
-  var accessToken = localStorage.getItem("token");
-
-  return fetchSharePointListByDisplayName(accessToken, "telephones_intervenant").then((listId) => {
-    if (listId) {
-      return fetchListItems(accessToken, listId);
-    }
-  });
-}
-
 //let accessToken = localStorage.getItem("Token");
 
 //accounts?$select=name,address1_city&$top=10
