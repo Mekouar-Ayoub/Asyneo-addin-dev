@@ -13,7 +13,6 @@ Office.onReady((info) => {
   if (info.host === Office.HostType.Outlook) {
     Office.context.mailbox.addHandlerAsync(Office.EventType.ItemChanged, itemChanged);
     updateTaskPaneUI(Office.context.mailbox.item);
-
     // Attach functions without calling immediately
     document.getElementById("getProfileButton").onclick = run;
     document.getElementById("societesButton").onclick = societesClick;
@@ -26,7 +25,12 @@ Office.onReady((info) => {
     };
     const elements = document.querySelectorAll(".animation-chek");
     elements.forEach((element) => {
-      element.addEventListener("click", animationchek);
+      if(element.getAttribute("client_sortie")){
+        element.addEventListener("click",animationchek_sortie);
+      }
+      if(element.getAttribute("client_blocker")){
+        element.addEventListener("click",animationchek_blocke);
+      }
     });
   }
 });
@@ -55,22 +59,50 @@ function useState(initialValue) {
 
 const [filter, setFilter] = useState('');
 const [page, setpage] = useState('societe');
-const [client, setClient] = useState(false);
-const [sortie, setSortie] = useState(false);
+const [dataId , setdataId] = useState();
+const [sortie , setSortie] = useState(false);
+const [blocker , setBlocker] = useState(false);
 
-function animationchek(event) {
-  const container = event.currentTarget;  // Use event.currentTarget to target the clicked ".animation-chek" element
-  const circle = container.querySelector(".circle");  // Find the ".circle" inside the clicked ".animation-chek"
+function animationchek_sortie(event) {
+  const container = event.currentTarget;
+  const circle = container.querySelector(".circle");
 
-  // Toggle the right position and background color
   if (circle.style.right === "50%") {
     circle.style.right = "0%";
     circle.style.backgroundColor = "#0072C6";
+    document.getElementById("societes").style.display = "block";
+    document.getElementById("correspondances").style.display = "none";
+    document.getElementById("intervenants").style.display = "none";
+    document.getElementById("societes").innerHTML = print_filteringData(societesData , societes_telData);
+    document.getElementById("home").style.display = "none";
   } else{
     circle.style.right = "50%";
     circle.style.backgroundColor = "gray";
+    societesClick()
   }
   console.log("successfully clicked");
+  
+  updateTaskPaneUI(Office.context.mailbox.item);
+}
+function animationchek_blocke(event) {
+  const container = event.currentTarget;
+  const circle = container.querySelector(".circle");
+  
+  if (circle.style.right === "50%") {
+    circle.style.right = "0%";
+    circle.style.backgroundColor = "#0072C6";
+    document.getElementById("societes").style.display = "block";
+    document.getElementById("correspondances").style.display = "none";
+    document.getElementById("intervenants").style.display = "none";
+    document.getElementById("societes").innerHTML = print_filteringData(societesData , societes_telData);
+    document.getElementById("home").style.display = "none";
+  } else{
+    circle.style.right = "50%";
+    circle.style.backgroundColor = "gray";
+    societesClick();
+  }
+  console.log("successfully clicked");
+  
   updateTaskPaneUI(Office.context.mailbox.item);
 }
 
@@ -123,22 +155,43 @@ export async function run() {
   });
 }
 
-function printDetails(element) {
-  let html = "<ul class='details-container'>";
 
-  // Loop over each property in `element.fields`
-  for (const [key, value] of Object.entries(element.fields)) {
-    html += `<li><strong>${key}:</strong> ${value}</li>`;
-  }
+function print_filteringData(data,tel_data){
+  var html;
+  html = "<ul class='data-display'>";
+  data.map((v)=>{
+          if(v.fields["field_22"]){
+            html +="<ul class='data-cart'>" + "<li class='societe-title'>"+"<span class='societe-name'>" + v.fields["field_2"] + "</span>"+"<span>ID: " + v.fields["Title"] + "</span>" +"</li>" +  
+                    "<li class='societe-ville'>"+"<img src='../../assets/home-icon.png'>"  + v.fields["field_15"] + "</li>";
+                const matchedTel = tel_data.find(e => e.fields["field_3"] == v.fields["Title"]);
+                if (matchedTel) {
+                  html += "<li class='societe-telephone'>"+"<img src='../../assets/telephone-icon.png'>" +" +"+ matchedTel.fields["field_2"] + "</li>";
+                } else {
+                  html += "<li class='societe-telephone'>No phone number</li>";
+                }
+                html += `<li class='button-details'><button id='detailsButton' >Voir details <img src='../../assets/icon-right-arrow.png'></button></li>`;;
+                html += "</ul>";
+          }
 
+  })
   html += "</ul>";
-
-  // Display the generated HTML in a specific container, e.g., with id "details"
-  document.getElementById("societe-details-container").innerHTML = html;
-  document.getElementById("societes").style.display ="none";
+  return html;
 }
 
-function printdata(data, type, tel, telType ,filter_content) {
+// function printDetails(element) {
+//   let html = "<ul class='details-container'>";
+
+//   for (const [key, value] of Object.entries(element.fields)) {
+//     html += `<li><strong>${key}:</strong> ${value}</li>`;
+//   }
+
+//   html += "</ul>";
+
+//   document.getElementById("societe-details-container").innerHTML = html;
+//   document.getElementById("societes").style.display ="none";
+// }
+
+function printdata(data, type, tel, telType ,filter_content ) {
   var html;
   var count;
 
@@ -147,7 +200,7 @@ function printdata(data, type, tel, telType ,filter_content) {
       count = 2;
       data.map((v) => {
         if(filter_content){
-            if(!filter_content || (v.fields["field_2"] && v.fields["field_2"].toLowerCase().includes(filter_content.toLowerCase()))){
+            if(!filter_content || (v.fields["field_2"] && v.fields["field_2"].toLowerCase().includes(filter_content.toLowerCase())) ){
                 html +="<ul class='data-cart'>" + "<li class='societe-title'>"+"<span class='societe-name'>" + v.fields["field_2"] + "</span>"+"<span>ID: " + v.fields["Title"] + "</span>" +"</li>" +  
                     "<li class='societe-ville'>"+"<img src='../../assets/home-icon.png'>"  + v.fields["field_15"] + "</li>";
                 const matchedTel = tel.find(e => e.fields["field_3"] == v.fields["Title"]);
@@ -157,7 +210,7 @@ function printdata(data, type, tel, telType ,filter_content) {
                   html += "<li class='societe-telephone'>No phone number</li>";
                 }
 
-                html += `<li class='button-details'><button id='detailsButton' onclick='printDetails(${JSON.stringify(v)})'>Voir details <img src='../../assets/icon-right-arrow.png'></button></li>`;;
+                html += `<li class='button-details'><button id='detailsButton' >Voir details <img src='../../assets/icon-right-arrow.png'></button></li>`;;
                 html += "</ul>";
               }
         }else{
@@ -173,9 +226,10 @@ function printdata(data, type, tel, telType ,filter_content) {
                   html += "<li class='societe-telephone'>No phone number</li>";
                 }
 
-              html += `<li class='button-details'><button id='' onclick='printDetails(${JSON.stringify(v)})'>Voir details <img src='../../assets/icon-right-arrow.png'></button></li>`;
+              html += `<li class='button-details'><button id='detailsButton'  class="details-btn" >Voir details <img src='../../assets/icon-right-arrow.png'></button></li>`;
               html += "</ul>";
         }
+        
       });
     
     html += "</ul>";
@@ -283,7 +337,7 @@ async function showHomeTaskPane(data) {
     getIntervenants_telData()
   ]);
 
-  document.getElementById("societes").innerHTML = printdata(data, "societes" , societes_telData , "telephones_societes",filter());
+    document.getElementById("societes").innerHTML = printdata(data, "societes" , societes_telData , "telephones_societes",filter());
   document.getElementById("route-state").innerHTML = "societes";
   document.getElementById("home").style.display = "none";
 }
@@ -319,4 +373,5 @@ function intervenantsClick() {
   document.getElementById("route-state").innerHTML = "intervenants";
   document.getElementById("home").style.display = "none";
 }
+
 
